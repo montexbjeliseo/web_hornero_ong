@@ -6,10 +6,10 @@ from django.conf import settings
 from . import models
 
 @receiver(post_save, sender=models.Contact)
-def enviar_mensaje_nuevo_contacto(sender, instance, **kwargs):
+def send_new_contact_email(sender, instance, **kwargs):
     
-    asunto = 'Nuevo contacto creado'
-    mensaje = f'{instance.name} te ha dejado un mensaje en el sitio\nVer en el sitio: http://{settings.DOMAIN}{instance.get_absolute_url()}'
-    destinatario = [settings.EMAIL_HOST_USER] 
+    subject = 'Nuevo contacto creado'
+    message = f'{instance.name} te ha dejado un mensaje en el sitio\nVer en el sitio: http://{settings.DOMAIN}{instance.get_absolute_url()}'
+    address = [settings.EMAIL_HOST_USER] 
     
-    send_mail(asunto, mensaje, None, destinatario, fail_silently=False)
+    send_mail(subject, message, None, address, fail_silently=False)
