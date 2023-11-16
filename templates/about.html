@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %}
+  Acerca de
+{% endblock %}
+{% block content %}
+  {% if section_rendered %}
+    {{ section_rendered|safe }}
+  {% else %}
+    {% include 'includes/about.html' %}
+    {% include 'includes/contact.html' %}
+  {% endif %}
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}
+Iniciar sesión
+{% endblock title %}
+
+{% block content %}
+<main class="container">
+    <div class="row justify-content-center ">
+        <div class="col-sm-12 col-md-8 col-lg-8 col-xl-6">
+            <form action="" method="POST">
+                <h1 class="mt-5">Iniciar sesión</h1>
+                {% csrf_token %}
+                <input type="hidden" name="next" value="{{next}}">
+                {{form|crispy}}
+                <button class="btn btn-success" type="submit">Iniciar sesion</button>
+                <p>
+                    <a href="{% url 'register' %}?next={{next}}">Crear nueva cuenta</a>
+                </p>
+                <p>
+                    <a href="{% url 'password_reset' %}">Recuperar contraseña</a>
+                </p>
+            </form>
+        </div>
+    </div>
+</main>
+{% endblock content %}

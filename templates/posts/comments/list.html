@@ -1,0 +1,17 @@
+<h3>Comentarios</h3>
+{% for postcomment in post.postcomment_set.all %}
+<div class="lead">
+    <b class="text-muted">{{postcomment.author}}</b> | <span>{{postcomment.updated_at}}</span>
+    {% if user == postcomment.author %}
+    <a class="text-secondary" href="{{postcomment.get_update_url}}"><i class="fa-solid fa-pen-to-square"></i></a>
+    {% endif %}
+    {% if user == postcomment.author or user.is_staff %}
+    <a class="text-danger" href="{{postcomment.get_delete_url}}"><i class="fa-solid fa-trash"></i></a>
+    {% endif %}
+    <p>
+        {{postcomment.text}}
+    </p>
+</div>
+{% empty %}
+<p><i>No hay comentarios</i></p>
+{% endfor %}

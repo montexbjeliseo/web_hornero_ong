@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %}
+Confirmar eliminacion de {{post.title}}
+{% endblock title %}
+{% block content %}
+<main class="container">
+    <div class="card mt-5">
+        <div class="card-header">
+            <h1>Confirmar eliminacion de articulo</h1>
+        </div>
+        <form class="card-body" action="" method="POST">
+            {% csrf_token %}
+            <h5 class="lead">
+                Estás seguro de que deseas borrar el articulo: "{{post}}"?
+            </h5>
+            <p><button class="btn btn-danger" type="submit">Confirmar</button> <a class="btn btn-secondary"
+                    href="{% url 'posts:index' %}">Cancelar</a></p>
+        </form>
+    </div>
+</main>
+{% endblock content %}

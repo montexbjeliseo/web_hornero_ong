@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+  Inicio
+{% endblock %}
+{% block content %}
+  {% if section_rendered %}
+    {{ section_rendered|safe }}
+  {% else %}
+    
+    {% include 'includes/carousel.html' %}
+    {% include 'includes/about.html' %}
+    {% include 'includes/featured_posts.html' %}
+    {% include 'includes/gallery.html' %}
+    {% include 'includes/contact.html' %}
+  {% endif %}
+{% endblock %}

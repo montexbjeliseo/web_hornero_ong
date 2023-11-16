@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{post.title}}
+{% endblock title %}
+
+{% block content %}
+<section class="container">
+    <div class="row">
+        <div class="my-2">
+            <a href="{% url 'index' %}">Blog</a> &gt; <a href="{% url 'posts:index' %}">Artículos</a> &gt; <a
+                href="{{post.category.get_filterby_link}}">{{post.category}}</a> &gt; <span>{{post.title}}</span>
+        </div>
+        <h1 class="mt-5">{{post.title}}</h1>
+        <b>{{post.author.username}} | {{post.created_at}} | {{post.updated_at}}</b>
+        <p>{{post.short_description}}</p>
+        {% if post.image %}
+            <img class="img-fluid" src="{{post.image.url}}" alt="{{post.title}}">
+        {% endif %}
+        <p>{{post.content|safe}}</p>
+        {% include 'posts/post_likes.html' %}
+        {% include 'posts/comments/list.html' %}
+        {% include 'posts/comments/form.html' %}
+    </div>
+</section>
+{% endblock content %}

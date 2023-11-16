@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  Contenidos de las secciones
+{% endblock %}
+
+{% block content %}
+  <main class="container mt-5">
+    <h1>Contenidos de secciones</h1>
+    <section>
+        <a class="btn btn-success" href="{% url 'create_section' %}">Crear recurso</a>
+    </section>
+    <section>
+      {% for section in sections %}
+        <h3>{{ section.title }} para {{ section.parent }}</h3>
+        <p>{{section.description}}</p>
+        <a class="btn btn-secondary" href="{{section.get_absolute_url}}">Editar</a>
+        <a class="btn btn-danger" href="{{section.get_delete_url}}">Eliminar</a>
+        {% empty %}
+        <h2>Aún no se ha creado ningún recurso</h2>
+      {% endfor %}
+    </section>
+  </main>
+{% endblock %}

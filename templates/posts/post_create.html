@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %}
+  Crear nuevo articulo
+{% endblock %}
+
+{% block content %}
+  <main class="container mt-5">
+    <div class="mt-5">
+      <h1 class="pt-5">Crear nuevo artículo</h1>
+    </div>
+    <form method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+
+      <div class="row">
+        <div class="col-lg-6">
+          <div id="div_id_slug" class="mb-3">
+            <label for="id_slug" class="form-label requiredField">
+              Slug
+              <span class="asteriskField">*</span>
+            </label>
+            <input type="text" name="slug" maxlength="50" class="textinput form-control" placeholder="Escribe el texto que se mostrará en la url" required="" id="id_slug" />
+          </div>
+          <div id="div_id_title" class="mb-3">
+            <label for="id_title" class="form-label requiredField">
+              Título del Artículo
+              <span class="asteriskField">*</span>
+            </label>
+            <input type="text" name="title" maxlength="100" class="textinput form-control" required="" id="id_title" placeholder="Escribe el titulo del artículo" />
+          </div>
+          <div id="div_id_short_description" class="mb-3">
+            <label for="id_short_description" class="form-label requiredField">
+              Descripción breve o resumen
+              <span class="asteriskField">*</span>
+            </label>
+            <textarea name="short_description" cols="40" rows="10" maxlength="750" class="textarea form-control" required="" id="id_short_description" placeholder="Escribe una breve descripcion o resumen del artículo"></textarea>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div id="div_id_category" class="mb-3">
+            <label for="id_category" class="form-label requiredField">
+              Categoría a la que pertenece
+              <span class="asteriskField">*</span>
+            </label>
+            <select name="category" class="select form-select" required="" id="id_category">
+              <option value="" selected="">---------</option>
+              {% for category in categories %}
+                <option value="{{ category.pk }}">{{ category.name }}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <div class="mb-3">
+            <div id="div_id_featured" class="mb-3 form-check">
+              <input type="checkbox" name="featured" class="checkboxinput form-check-input" id="id_featured" />
+              <label for="id_featured" class="form-check-label">Es destacado?</label>
+            </div>
+          </div>
+          <div id="div_id_image" class="mb-3">
+            <label for="id_image" class="overlay form-label w-100 h-100 object-fit-contain ">
+              <img id="previewImage" class="img-fluid" src="{% static 'img/image.svg' %}" alt="" />
+              <div class="overlay-text">Subir o Cambiar Imagen</div>
+            </label>
+            <input class="d-none" type="file" name="image" class="form-control" accept="image/*" id="id_image" />
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div id="div_id_content" class="mb-3">
+          <label for="id_content" class="form-label requiredField">Contenido del artículo<span class="asteriskField">*</span></label> <textarea name="content" cols="40" rows="10" class="textarea form-control" required="" id="id_content"></textarea> <div id="hint_id_content" class="form-text">Escribe el contenido del artículo</div>
+        </div>
+        <p>
+          <button class="btn btn-success" type="submit">Crear Publicación</button>
+          <a class="btn btn-secondary" href="{% url 'posts:index' %}">Cancelar</a>
+        </p>
+      </div>
+    </form>
+  </main>
+  {% include 'posts/editor.html' %}
+  <script>
+    
+    document.getElementById('id_image').addEventListener('change', function () {
+      const file = this.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          document.getElementById('previewImage').src = e.target.result;
+        }
+        reader.readAsDataURL(file);
+      }
+    })
+  </script>
+{% endblock %}

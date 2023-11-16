@@ -1,0 +1,18 @@
+{% load crispy_forms_tags %}
+{% if user.is_authenticated %}
+  <form method="POST" action="{{ post.get_add_comment_url }}">
+    {% csrf_token %}
+    <h3>Deja un comentario</h3>
+    <input type="hidden" name="author" value="{{ user.pk }}" />
+    <div id="div_id_text" class="mb-3">
+      <textarea name="text" cols="40" rows="3" maxlength="300" class="textarea form-control" required="" id="id_text" resize="none"></textarea>
+    </div>
+    <div>
+      <button type="submit" class="btn btn-success">Comentar</button>
+    </div>
+  </form>
+{% else %}
+  <p>
+    Para comentar debes <a href="{% url 'login' %}?next={{ post.get_absolute_url }}">Iniciar sesión</a>
+  </p>
+{% endif %}

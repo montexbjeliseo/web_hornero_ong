@@ -1,0 +1,36 @@
+<article class="card my-3">
+  <div class="card-body">
+    <a href="{{post.get_absolute_url}}" class="text-decoration-none text-dark"><h2 class="mt-5">{{ post.title }}</h2></a>
+    <p>{{ post.short_description }}</p>
+    <p>
+      Escrito por <a href="{{ post.author.get_absolute_url }}" class="text-primary text-decoration-none ">
+        <b>
+          {% if post.author %}
+            {{ post.author }}
+          {% else %}
+            Anónimo
+          {% endif %}
+        </b>
+      </a> in <a href="{{ post.category.get_filterby_link }}" class="text-primary text-decoration-none ">
+        <b>
+          {% if post.category %}
+            {{ post.category }}
+          {% else %}
+            Sin categoría
+          {% endif %}
+        </b>
+      </a> - <span class="bi {% if user in post.likes.all %}
+
+        {% endif %}">
+        Me gusta: {{ post.likes.all|length }}
+      </span>
+      - <span>Veces abierto: {{ post.views }}</span>
+      - <span>Comentarios: {{ post.postcomment_set.all|length }}</span>
+    </p>
+    <a class="card-link text-primary" href="{{ post.get_absolute_url }}">Seguir leyendo...</a>
+    {% if user.is_staff %}
+      <a class="text-secondary" href="{{ post.get_update_url }}">Actualizar</a>
+      <a class="text-danger" href="{{ post.get_delete_url }}">Eliminar</a>
+    {% endif %}
+  </div>
+</article>

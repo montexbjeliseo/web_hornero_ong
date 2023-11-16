@@ -1,0 +1,62 @@
+{% load static %}
+<section class="bg-light">
+    <section class="container py-5">
+      <div class="row text-center py-3">
+        <div class="col-lg-6 m-auto">
+          <h1 class="h1">Galería</h1>
+          <p>Aquí puedes ver las imágenes destacadas</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12 col-md-4 mb-4">
+          <div class="card h-100">
+            <div class="card-body">
+              <img src="{% static 'img/ONG/IMG-20231004-WA0030.jpg' %}" alt="" class="gallery-image" />
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-md-4 mb-4">
+          <div class="card h-100">
+            <div class="card-body">
+              <img src="{% static 'img/ONG/IMG-20231004-WA0038.jpg' %}" alt="" class="gallery-image" />
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-md-4 mb-4">
+          <div class="card h-100">
+            <div class="card-body">
+              <img src="{% static 'img/ONG/IMG-20231004-WA0039.jpg' %}" alt="" class="gallery-image" />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12 col-md-4 mb-4">
+          <div class="card h-100">
+            <div class="card-body">
+              <img src="{% static 'img/ONG/IMG-20231004-WA0036.jpg' %}" alt="" class="gallery-image" />
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-md-4 mb-4">
+          <div class="card h-100">
+            <div class="card-body">
+              <img src="{% static 'img/ONG/IMG-20231004-WA0042.jpg' %}" alt="" class="gallery-image" />
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-md-4 mb-4">
+          <div class="card h-100">
+            <div class="card-body">
+              <img src="{% static 'img/ONG/IMG-20231004-WA0041.jpg' %}" alt="" class="gallery-image" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </section>
+  <section class="bg-primary text-center">
+    <a href="{% url 'gallery:index' %}" class="btn text-white py-4 align-middle"><h4><b>Ver más imágenes <i class="bi bi-arrow-right"></i></b></h4></a>
+  </section>
+
+  <script src="{% static 'js/gallery.js' %}"></script>

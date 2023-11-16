@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+  Articulos
+{% endblock %}
+{% block content %}
+  <main class="d-flex bg-light">
+    <section class="container">
+      {% if user.is_staff %}
+        <a class="btn btn-success my-3" href="{% url 'posts:create' %}"><i class="fa-solid fa-plus"></i> Nueva Publicación</a>
+        <a class="btn btn-secondary my-3" href="{% url 'posts:create_category' %}"><i class="fa-solid fa-plus"></i> Nueva Categoría</a>
+      {% endif %}
+      <div>
+        <form action="" method="get">
+          <label for="category_id">Categor&iacute;a:</label>
+          <select name="category_id" id="category_id">
+            <option value="" {% if request.GET.category == '' %}selected{%endif%}>Todas</option>
+            {% for category in categories %}
+              <option value="{{ category.slug }}" {% if request.GET.category == category.slug %}selected{%endif%}>{{ category.name }}</option>
+            {% endfor %}
+          </select>
+          <label for="order_by">Ordenar:</label>
+          <select name="order_by" id="order_by">
+            <option value="date-asc" {% if request.GET.order_by == '' or request.GET.order_by == 'date-asc' %}selected{%endif%}>M&aacute;s recientes</option>
+            <option value="date-desc" {% if request.GET.order_by == 'date-desc' %}selected{%endif%}>Más antiguos</option>
+            <option value="featured" {% if request.GET.order_by == 'featured' %}selected{%endif%}>Destacados</option>
+          </select>
+        </form>
+      </div>
+      {% if request.GET.q %}
+        <h1>Resultados para: {{ request.GET.q }}</h1>
+      {% elif request.GET.category %}
+        <h1>Artículos en: {{ request.GET.category }}</h1>
+      {% endif %}
+      {% for post in posts %}
+        {% include 'posts/post_card.html' %}
+        {% empty %}
+        {% if request.GET.q %}
+          <h2>No hay resultados para "{{ request.GET.q }}"</h2>
+        {% elif request.GET.category %}
+          <h2>No hay articulos en categoría "{{ request.GET.category }}"</h2>
+        {% else %}
+          <h2>No hay articulos para mostrar</h2>
+        {% endif %}
+      {% endfor %}
+    </section>
+  </main>
+  <script src="{% static 'js/post_filtering.js' %}"></script>
+{% endblock %}

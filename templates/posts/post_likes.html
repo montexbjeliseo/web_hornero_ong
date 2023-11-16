@@ -1,0 +1,10 @@
+<div>
+    {% if user in post.likes.all %}
+    <h5><i>Has indicado que te gusta este artículo</i></h5>
+    {% endif %}
+    <form action="{{post.get_like_url}}" method="POST">
+        {% csrf_token %}
+        <button class="btn bi {% if user in post.likes.all %}bi-heart-fill text-danger{% else %}bi-heart{%endif%}"
+            type="submit"> {{post.likes.all|length}}</button>
+    </form>
+</div>

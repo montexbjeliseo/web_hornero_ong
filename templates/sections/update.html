@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}
+  Editar Sección
+{% endblock %}
+{% block content %}
+  <main class="container mt-5">
+    <h1>Editar Sección</h1>
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      {{ form|crispy }}
+      {{ formset|crispy }}
+      <input type="submit" value="Guardar" />
+    </form>
+  </main>
+{% endblock %}

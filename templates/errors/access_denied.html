@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Error 403 - Acceso prohibido
+{% endblock title %}
+
+{% block content %}
+<div class="container">
+    <div class="mt-5">
+        <h1>Error 403 - Acceso prohibido</h1>
+        <p>Lo sentimos, no tienes permiso para acceder a esta página.</p>
+        <a href="{% url 'index' %}"> Página principal</a> -
+        <a href="{% url 'contacts:contactus' %}">Contactar al administrador</a>
+    </div>
+</div>
+{% endblock content %}

@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}
+{% endblock title %}
+{% block content %}
+<div class="container">
+    {% if user.is_authenticated %}
+    <form method="POST" action="{{post.get_add_comment_url}}">
+        {% csrf_token %}
+        <h3 class="mt-5">Actualizar comentario</h3>
+
+        <div>
+            {{form|crispy}}
+        </div>
+        <div>
+            <button class="btn btn-success" type="submit">Actualizar</button>
+            <a class="btn btn-secondary" href="{{postcomment.post.get_absolute_url}}">Cancelar</a>
+        </div>
+    </form>
+
+    {% else %}
+    <p>Para comentar debes <a href="#">Iniciar sesión</a></p>
+    {% endif %}
+</div>
+{% endblock content %}

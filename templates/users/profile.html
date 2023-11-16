@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Acerca de {{user_data.username}}
+{% endblock title %}
+{% load static %}
+{% block content %}
+<main class="container">
+    <div width="250">
+        <img src="{% if user_data.image %}{{user_data.image.url}}{% else %}{% static 'img/users/default.jpg' %}{% endif %}"
+            alt="{{user_data.username}}" class="img-fluid">
+    </div>
+    <h1>u/{{user_data.username|title}}</h1>
+    <p><b class="text-muted">{% if user_data.is_staff %}Colaborador{% endif %}</b></p>
+    {% if user_data.username == user.username and user_data %}
+    <button type="button" class="btn btn-primary">Editar perfil</button>
+    {% endif %}
+</main>
+{% endblock content %}

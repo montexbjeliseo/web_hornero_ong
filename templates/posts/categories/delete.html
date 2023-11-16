@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Confirmar eliminacion de categoría
+{% endblock title %}
+
+{% block content %}
+<main class="container">
+    <div class="card mt-5">
+        <div class="card-header">
+            <h1>Confirmar eliminacion de categoría</h1>
+        </div>
+        <div class="card-body">
+            <form action="" method="POST">
+                {% csrf_token %}
+                <p>
+                    Estás seguro de que deseas borrar la categoría "{{category.name}}"?
+                </p>
+                <p>
+                    <button class="btn btn-danger" type="submit">Confirmar</button>
+                    <a class="btn btn-secondary" href="{% url 'posts:index' %}">Cancelar</a>
+                </p>
+            </form>
+        </div>
+    </div>
+</main>
+{% endblock content %}

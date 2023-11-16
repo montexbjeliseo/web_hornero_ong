@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Confirmar eliminacion de comentario
+{% endblock title %}
+
+{% block content %}
+<main class="container">
+    <div class="card mt-5">
+        <div class="card-header">
+            <h1>Confirmar eliminacion de comentario</h1>
+        </div>
+        <div class="card-body">
+            <form action="" method="POST">
+                {% csrf_token %}
+                <p>
+                    Estás seguro de que deseas borrar el comentario "{{postcomment.text}}"?
+                </p>
+                <p>
+                    <button class="btn btn-danger" type="submit">Confirmar</button>
+                    <a class="btn btn-secondary" href="{{postcomment.post.get_absolute_url}}">Cancelar</a>
+                </p>
+            </form>
+        </div>
+    </div>
+</main>
+{% endblock content %}

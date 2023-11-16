@@ -1,0 +1,30 @@
+{% load static %}
+<section class="bg-light">
+  <section class="container py-5">
+    <div class="row text-center py-3">
+      <div class="col-lg-6 m-auto">
+        <h1 class="h1">Art&iacute;culos destacados</h1>
+        <p>Aqu&iacute; puedes ver los art&iacute;culos m&aacute;s destacados</p>
+      </div>
+    </div>
+    <div class="row">
+      {% for post in featured_posts %}
+        <div class="col-12 col-md-4 mb-4">
+          <div class="card h-100">
+            <div class="card-body">
+              <a href="{{ post.get_absolute_url }}" class="text-black text-decoration-none ">
+                <img src="{{ post.image.url }}" alt="" class="post-thumbnail-image" />
+                <h2>{{ post.title }}</h2>
+                <p>{{ post.short_description }}</p>
+              </a>
+            </div>
+          </div>
+        </div>
+        {% empty %}
+      {% endfor %}
+    </div>
+  </section>
+</section>
+<div class="bg-info text-center">
+  <a href="{% url 'posts:index' %}" class="btn text-white py-4 align-middle"><h4><b>Ver más art&iacute;culos</b><i class="bi bi-arrow-right"></i></h4></a>
+</div>
